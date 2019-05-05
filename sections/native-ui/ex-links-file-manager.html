@@ -1,0 +1,62 @@
+<template class="task-template">
+  <section id="ex-links-file-manager-section" class="section js-section u-category-native-ui">
+    <header class="section-header">
+      <div class="section-wrapper">
+        <h1>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-native-ui"></use></svg>
+          打开外部链接和文件管理器
+        </h1>
+        <h3> Electron中的<code>shell</code>模块允许访问某些本机元素，如文件管理器和默认Web浏览器。</h3>
+        <p>详情请在 <a href="http://electron.atom.io/docs/api/shell">完整的API文档<span class="u-visible-to-screen-reader">(opens in new window)</span></a> 查阅</p>
+      </div>
+    </header>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="open-file-manager-demo-toggle" class="js-container-target demo-toggle-button">在文件管理器中打开路径
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="open-file-manager">查看例子</button>
+          </div>
+          <p>这演示了如何使用<code>shell</code>模块在特定位置打开系统文件管理器。</p>
+          <p>单击演示按钮将在根目录下打开文件管理器。</p>
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/native-ui/ex-links-file-manager/file-manager.js"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="open-ex-links-demo-toggle" class="js-container-target demo-toggle-button">打开外部链接
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="open-ex-links">查看例子</button>
+          </div>
+          <p>如果不希望自己的应用在<em>应用中打开网站链接</em>，则可以使用<code>shell</code>模块在外部打开它们。点击后，链接将在应用外部和用户的默认Web浏览器中打开。</p>
+          <p>单击演示按钮时，电子网站将打开<p>
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/native-ui/ex-links-file-manager/ex-links.js"></code></pre>
+
+          <div class="demo-protip">
+            <h2>提示</h2>
+            <strong>从外部打开所有网站链接。</strong>
+            <p>可能希望打开应用程序之外的所有<code>http</code>和<code>https</code>链接。 为此，请查询文档并循环遍历每个链接并添加侦听器。此应用使用下面的代码，该代码位于<code>assets/ex-links.js</code>中。</p>
+            <h5>Renderer Process</h5>
+            <pre><code data-path="assets/ex-links.js"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      require('./renderer-process/native-ui/ex-links-file-manager/file-manager')
+      require('./renderer-process/native-ui/ex-links-file-manager/ex-links')
+    </script>
+
+  </section>
+</template>

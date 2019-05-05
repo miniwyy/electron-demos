@@ -1,0 +1,68 @@
+<template class="task-template">
+  <section id="crash-hang-section" class="section js-section u-category-windows">
+    <header class="section-header">
+      <div class="section-wrapper">
+        <h1>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg>
+          处理窗口崩溃和挂起
+        </h1>
+        <h3><code>BrowserWindow</code>模块将在渲染器进程崩溃或挂起时发出事件。 可以监听这些事件，并让用户有机会重新加载，等待或关闭该窗口。</h3>
+
+        <p>详情请在 <a href="http://electron.atom.io/docs/api/browser-window">完整的API文档<span class="u-visible-to-screen-reader">(opens in new window)</span></a> 查阅</p>
+      </div>
+    </header>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="new-window-crashes-demo-toggle" class="js-container-target demo-toggle-button">进程崩溃后重新启动窗口
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Main</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="process-crash">查看例子</button>
+          </div>
+          <p>在本演示中，创建了一个新窗口（通过<code>remote</code>模块）并提供了一个链接，该链接将使用<code>process.crash()</code>强制崩溃。</p>
+          <p>窗口正在侦听崩溃事件，当事件发生时，它会提示用户有两个选项：重新加载或关闭。</p>
+
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/windows/process-crash.js"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="new-window-hangs-demo-toggle" class="js-container-target demo-toggle-button">进程挂起后重新启动窗口
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Main</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="process-hang">查看例子</button>
+          </div>
+          <p>在本演示中，创建了一个新窗口（通过<code>remote</code>模块）并提供了一个链接，该链接将使用<code>process.hang()</code>强制进程挂起。</p>
+          <p>窗口正在侦听正式无响应的进程（最多可能需要30秒）。 发生此事件时，它会提示用户有两个选项：重新加载或关闭。</p>
+
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/windows/process-hang.js"></code></pre>
+
+          <div class="demo-protip">
+            <h2>提示</h2>
+            <strong>等待进程再次响应。</strong>
+            <p>对于挂起的进程，第三个选项是等待并查看问题是否解决，从而允许进程再次响应。为此，请使用<code>BrowserWindow</code>事件'responsive'，如下所示。</p>
+            <pre><code class="language-js">win.on('responsive', function () {
+  // Do something when the window is responsive again
+})</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+      require('./renderer-process/windows/process-crash')
+      require('./renderer-process/windows/process-hang')
+    </script>
+
+  </section>
+</template>

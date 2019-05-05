@@ -1,0 +1,41 @@
+<template class="task-template">
+  <section id="protocol-section" class="section js-section u-category-system">
+    <header class="section-header">
+      <div class="section-wrapper">
+        <h1>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
+          协议处理程序
+        </h1>
+        <p>详情请在 <a href="http://electron.atom.io/docs/api/app">完整的API文档<span class="u-visible-to-screen-reader">(opens in new window)</span></a> 查阅</p>
+      </div>
+    </header>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="copy-to-demo-toggle" class="js-container-target demo-toggle-button">从URL中启动另一个应用
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS <span class="demo-meta-divider">|</span> Process: Main</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="protocol-handler">查看例子</button>
+          </div>
+          <p>可以将应用程序设置为默认应用程序，以便为特定协议打开。 例如，在本演示中，将此应用程序设置为<code> electron-api-demos://</code>的默认值。上面的演示按钮将在默认浏览器中启动一个带有链接的页面。 点击该链接，它将重新启动此应用</p>
+          <h5>打包</h5>
+          <p>此功能仅适用于打包应用程序时的macOS。 当从命令行启动它时，它将无法工作。 当打包应用程序时，需要确保更新应用程序的macOS <code> plist </code>以包含新的协议处理程序。 如果正在使用<code> electron-packager </code>，那么可以添加标志<code>--extend-info </code>，其中包含创建的<code> plist </code>的路径。 下面是一个应用程序</p>
+          <h5>渲染过程</h5>
+          <pre><code data-path="renderer-process/system/protocol-handler.js"></code></pre>
+          <h5>主要流程</h5>
+          <pre><code data-path="main-process/system/protocol-handler.js"></code></pre>
+          <h5>macOS plist</h5>
+          <pre><code class="language-xml" data-path="assets/mac/info.plist"></code></pre>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      require('./renderer-process/system/protocol-handler')
+    </script>
+
+  </section>
+</template>

@@ -1,0 +1,85 @@
+<template class="task-template">
+  <section id="ipc-section" class="section js-section u-category-communication">
+    <header class="communication">
+      <div class="section-wrapper">
+        <h1>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
+          进程之间的通信
+        </h1>
+        <h3><code>ipc</code>（inter-process communication）模块允许在主进程和渲染器进程之间发送和接收同步和异步消息。</h3>
+
+        <p>此模块有一个版本可供两个进程使用：<code>ipcMain</code>和<code>ipcRenderer</code>。</p>
+        <p>详情请在 <a href="http://electron.atom.io/docs/api/ipc-main">main process<span class="u-visible-to-screen-reader">(opens in new window)</span></a> 和 <a href="http://electron.atom.io/docs/api/ipc-renderer/">renderer process<span class="u-visible-to-screen-reader">(opens in new window)</span></a> 查阅</p>
+      </div>
+    </header>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="async-msg-demo-toggle" class="js-container-target demo-toggle-button">异步消息
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="async-msg">Ping</button>
+            <span class="demo-response" id="async-reply"></span>
+          </div>
+          <p>使用<code>ipc</code>以异步方式在进程之间发送消息是首选方法，因为它将在完成时返回，而不会阻止同一进程中的其他操作。</p>
+
+          <p>此示例从此进程（渲染器）向主进程发送“ping”。 然后主流程以“pong”回复。</p>
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/communication/async-msg.js"></code></pre>
+          <h5>Main Process</h5>
+          <pre><code data-path="main-process/communication/async-msg.js"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="sync-msg-demo-toggle" class="js-container-target demo-toggle-button">同步消息
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="sync-msg">Ping</button>
+            <span class="demo-response" id="sync-reply"></span>
+          </div>
+          <p>也可以使用<code>ipc</code>模块在进程之间发送同步消息，但请注意，此方法的同步特性意味着<b>将在完成时阻止</b>其他操作它的任务。</p>
+          <p>示例从此进程（呈现器）向主进程发送同步消息“ping”。 然后主流程以“pong”回复。</p>
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/communication/sync-msg.js"></code></pre>
+          <h5>Main Process</h5>
+          <pre><code data-path="main-process/communication/sync-msg.js"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-wrapper">
+        <button id="invis-msg-demo-toggle" class="js-container-target demo-toggle-button">与隐形窗口沟通
+          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+        </button>
+        <div class="demo-box">
+          <div class="demo-controls">
+            <button class="demo-button" id="invis-msg">计算因子</button>
+            <span class="demo-response" id="invis-reply"></span>
+          </div>
+          <p>通常的做法是创建一个新的隐形浏览器窗口（渲染器进程），以便在不影响主应用程序窗口性能的情况下运行任务。</p>
+          <p>在示例中，使用<code>remote</code>模块从此渲染器进程创建一个新的不可见浏览器窗口。 加载新页面时，会发送一条消息，其中包含新窗口正在侦听的<code>ipc</code>。</p>
+          <p>新窗口然后计算阶乘，并将结果发送给原始窗口，并将其添加到上面的页面中。</p>
+          <h5>Renderer Process</h5>
+          <pre><code data-path="renderer-process/communication/invisible-msg.js"></code></pre>
+          <h5>Invisible Window Page HTML</h5>
+          <pre><code data-path="sections/communication/invisible.html"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      require('./renderer-process/communication/sync-msg')
+      require('./renderer-process/communication/async-msg')
+      require('./renderer-process/communication/invisible-msg')
+    </script>
+
+  </section>
+</template>
